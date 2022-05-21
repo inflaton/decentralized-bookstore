@@ -37,16 +37,28 @@
 
 <script>
 // importing common function
-import mixin from "./libs/mixinViews";
-import TopMenu from "./components/TopMenu.vue";
-import { DialogWrapper } from 'vue3-promise-dialog';
+import mixin from './libs/mixinViews'
+import TopMenu from './components/topMenu.vue'
+import { DialogWrapper } from 'vue3-promise-dialog'
 
 export default {
   components: { TopMenu, DialogWrapper },
   mixins: [mixin],
 
-  name: "App",
-};
+  name: 'App',
+
+  methods: {
+    onSmartContractError(e) {
+      console.log(`onSmartContractError: ${JSON.stringify(e)}`)
+      this.bcSmartContractAddressError = true
+      this.showConnectionErrorMessage(e)
+    },
+  },
+
+  created() {
+    this.$Event.on('smart_contract_error', this.onSmartContractError)
+  },
+}
 </script>
 
 <style>

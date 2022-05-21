@@ -53,7 +53,7 @@ contract Bookstore is BSContext {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    constructor() ERC721('My Bookshelf', 'BOOKNFT') {}
+    constructor() ERC721('My Books', 'BOOK_NFT') {}
 
     function totalBooks(bool validOnly) public view returns (Book[] memory) {
         uint256 count = 0;

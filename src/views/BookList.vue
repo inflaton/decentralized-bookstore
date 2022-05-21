@@ -197,6 +197,7 @@ export default {
         })
         .catch((err) => {
           console.log('totalBooks error:', err)
+          this.$Event.emit('smart_contract_error', err)
         })
     },
   }, // end methods

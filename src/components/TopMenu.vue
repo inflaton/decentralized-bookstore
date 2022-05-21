@@ -9,22 +9,6 @@
         </strong>
       </li>
     </ul>
-    <!--
-    <ul class="navbar-nav">     
-      <li class="nav-link">
-         <router-link to="/connect"><strong :class="connectedClass">
-          {{
-            bcConnected ? `Connected to ${this.networkName}` : "Not Connected"
-          }}
-        </strong></router-link>
-      </li>
-      <li class="nav-link">
-         <router-link to="/"><strong :class="connectedClass">
-          Home
-        </strong></router-link>
-      </li>
-    </ul>
-    -->
     <transaction-modal
       v-if="showModal"
       :transactionData="transactionObject"
@@ -41,7 +25,7 @@
 <script>
 // importing common function
 import mixin from '../libs/mixinViews'
-import transactionModal from '../components/transactionModal.vue'
+import transactionModal from './transactionModal.vue'
 
 export default {
   mixins: [mixin],

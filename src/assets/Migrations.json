@@ -1313,7 +1313,7 @@
   "sourceMap": "60:519:13:-:0;;;158:49;;;;;;;;;;190:10;182:5;;:18;;;;;;;;;;;;;;;;;;60:519;;;;;;",
   "deployedSourceMap": "60:519:13:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;402:175;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;112:39;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;86:20;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;284:112;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;402:175;263:5;;;;;;;;;;249:19;;:10;:19;;;245:26;;;468:19:::1;501:11;468:45;;523:8;:21;;;545:24;;523:47;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;270:1;245:26:::0;402:175;:::o;112:39::-;;;;:::o;86:20::-;;;;;;;;;;;;:::o;284:112::-;263:5;;;;;;;;;;249:19;;:10;:19;;;245:26;;;380:9:::1;353:24;:36;;;;245:26:::0;284:112;:::o;7:139:14:-;;91:6;78:20;69:29;;107:33;134:5;107:33;:::i;:::-;59:87;;;;:::o;152:139::-;;236:6;223:20;214:29;;252:33;279:5;252:33;:::i;:::-;204:87;;;;:::o;297:262::-;;405:2;393:9;384:7;380:23;376:32;373:2;;;421:1;418;411:12;373:2;464:1;489:53;534:7;525:6;514:9;510:22;489:53;:::i;:::-;479:63;;435:117;363:196;;;;:::o;565:262::-;;673:2;661:9;652:7;648:23;644:32;641:2;;;689:1;686;679:12;641:2;732:1;757:53;802:7;793:6;782:9;778:22;757:53;:::i;:::-;747:63;;703:117;631:196;;;;:::o;833:118::-;920:24;938:5;920:24;:::i;:::-;915:3;908:37;898:53;;:::o;957:118::-;1044:24;1062:5;1044:24;:::i;:::-;1039:3;1032:37;1022:53;;:::o;1081:222::-;;1212:2;1201:9;1197:18;1189:26;;1225:71;1293:1;1282:9;1278:17;1269:6;1225:71;:::i;:::-;1179:124;;;;:::o;1309:222::-;;1440:2;1429:9;1425:18;1417:26;;1453:71;1521:1;1510:9;1506:17;1497:6;1453:71;:::i;:::-;1407:124;;;;:::o;1537:96::-;;1603:24;1621:5;1603:24;:::i;:::-;1592:35;;1582:51;;;:::o;1639:126::-;;1716:42;1709:5;1705:54;1694:65;;1684:81;;;:::o;1771:77::-;;1837:5;1826:16;;1816:32;;;:::o;1854:122::-;1927:24;1945:5;1927:24;:::i;:::-;1920:5;1917:35;1907:2;;1966:1;1963;1956:12;1907:2;1897:79;:::o;1982:122::-;2055:24;2073:5;2055:24;:::i;:::-;2048:5;2045:35;2035:2;;2094:1;2091;2084:12;2035:2;2025:79;:::o",
   "source": "//SPDX-License-Identifier: GPL-3.0\npragma solidity ^0.8.0;\n\ncontract Migrations {\n    address public owner;\n    uint256 public last_completed_migration;\n\n    constructor() {\n        owner = msg.sender;\n    }\n\n    modifier restricted() {\n        if (msg.sender == owner) _;\n    }\n\n    function setCompleted(uint256 completed) public restricted {\n        last_completed_migration = completed;\n    }\n\n    function upgrade(address new_address) public restricted {\n        Migrations upgraded = Migrations(new_address);\n        upgraded.setCompleted(last_completed_migration);\n    }\n}\n",
-  "sourcePath": "/Users/donghao/Documents/code/emtech/decentralized-library/d-bookstore/smart-contracts/contracts/Migrations.sol",
+  "sourcePath": "/Users/donghao/Documents/code/inflaton/decentralized-bookstore/smart-contracts/contracts/Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -1944,20 +1944,20 @@
     "1": {
       "events": {},
       "links": {},
-      "address": "0x10106ace938E538eE27055E29a78E6068a574D89",
-      "transactionHash": "0x27606cf16f22df5ca1a3c1463db9f4af89f59ee28933f715424dd02e3a99f9c8"
+      "address": "0x4e42D1e00f2dCb4534c620d33E3EA9fB3fa705c6",
+      "transactionHash": "0xd8704858319a51a563b19c69f88ff10860020a6ed1ea45451230fd14036b0ab8"
     },
     "3": {
       "events": {},
       "links": {},
-      "address": "0xFb780DbEf1bcFa51321bcfc84D988C22348bA8fB",
-      "transactionHash": "0xfaa2d0c4b39401e16a3cc947312d1ae25c616b851fb8443f153c9ba50651522a"
+      "address": "0x6b2c3Ac7C93dC240CFbAD16b7506181B6ee47cdA",
+      "transactionHash": "0x5a8954c128c6b81fc82a29fff7420f2a36374504656f5a390d8f48f7b6145c37"
     },
     "4": {
       "events": {},
       "links": {},
-      "address": "0x6b2c3Ac7C93dC240CFbAD16b7506181B6ee47cdA",
-      "transactionHash": "0x11e5ef2157b1ff4033bf59a9ddb89e013fee9de967bdfb5d4370c733493f633d"
+      "address": "0xE6894988d9380C3fDbDA722BFd8E103EAE5080A7",
+      "transactionHash": "0x021b2062bf2ebdaa3c71edd639c4ce752cd80c56c95ab14a77aea5a8f75f143a"
     },
     "42": {
       "events": {},
@@ -1974,8 +1974,8 @@
     "83": {
       "events": {},
       "links": {},
-      "address": "0x0116079C917CFf9b718d4d2FFe22081543A835c9",
-      "transactionHash": "0xf7ebc74516f47c283ec3300e67d8f7efd1963d94880f1fa9cf8f7e2feaf46369"
+      "address": "0x86737D6341aBeA0A3f20F96a78919c1A0Ffea602",
+      "transactionHash": "0xcec9c62bb217692da110faf87cb6e7dee93c1f6cd9fb911ee278d51965b22b85"
     },
     "1337": {
       "events": {},
@@ -1986,18 +1986,18 @@
     "80001": {
       "events": {},
       "links": {},
-      "address": "0x1DBa1b531Bc14942db9Fc8Bd888E0c705cfdBBa2",
-      "transactionHash": "0xa7ba229c64fee5050daa20f653afc60e80adfecee557ae3ef85b1a2b23923d12"
+      "address": "0xb828Fe988975D515964Fc20EDD098102EEeb1d9c",
+      "transactionHash": "0x286c6a26aca053e2e02f2a1bc57796cea2f2472193ade96a11eebcc71afd6c6e"
     },
     "421611": {
       "events": {},
       "links": {},
-      "address": "0x137037576ce133452a52Ca1fB8a09F9767b9b304",
-      "transactionHash": "0xc9279835736c9b8a6eff3d0daa209d470a3619de28e38e3797a5be781123b2e1"
+      "address": "0xd73Eb9495248c4c621868318C9877aA4A8377F11",
+      "transactionHash": "0xdd86254902680d7a6603a6afe6761370b43b9afcd5ae54e8c64ad7fc95bfac2d"
     }
   },
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-05-18T09:07:44.014Z",
+  "updatedAt": "2022-05-21T07:41:46.535Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
