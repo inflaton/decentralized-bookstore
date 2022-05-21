@@ -38,7 +38,7 @@
 <script>
 // importing common function
 import mixin from './libs/mixinViews'
-import TopMenu from './components/topMenu.vue'
+import TopMenu from './components/TopMenu.vue'
 import { DialogWrapper } from 'vue3-promise-dialog'
 
 export default {

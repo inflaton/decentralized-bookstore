@@ -13,7 +13,6 @@
     "start": "node server/index.js",
     "go": "yarn build && yarn start",
     "deploy": "ipfs-deploy -p pinata dist/",
-    "upload": "node scripts/uploadFile.js",
     "lint": "prettier -c --parser typescript \"{src,__tests__,e2e}/**/*.[jt]s?(x)\"",
     "lint:fix": "yarn run lint --write",
     "test:types": "tsc --build tsconfig.json",

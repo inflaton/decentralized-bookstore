@@ -50,7 +50,7 @@
 <script>
 import Datepicker from 'vue3-datepicker'
 import mixin from '../libs/mixinSmartContracts'
-import createNFTMetaDataURIViaPinata from '../libs/mintNFT'
+import createNFTMetaDataURIViaPinata from '../libs/createNFTMetaDataURI'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {

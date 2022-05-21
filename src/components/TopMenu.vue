@@ -25,7 +25,7 @@
 <script>
 // importing common function
 import mixin from '../libs/mixinViews'
-import transactionModal from './transactionModal.vue'
+import TransactionModal from './TransactionModal.vue'
 
 export default {
   mixins: [mixin],
@@ -42,7 +42,7 @@ export default {
   },
 
   components: {
-    transactionModal,
+    TransactionModal,
   },
 
   methods: {

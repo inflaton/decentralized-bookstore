@@ -1,11 +1,11 @@
-import Web3 from "web3";
-import Chains from "../assets/chains.json";
+import Web3 from 'web3'
+import Chains from '../assets/Chains.json'
 
 class BcExplorer {
   constructor() {
-    this.web3inst = null; // store the web3 instance
-    this.contractInst = {}; // store the smart contract instance
-    this.contractAddr = {}; // store the smart contract instance
+    this.web3inst = null // store the web3 instance
+    this.contractInst = {} // store the smart contract instance
+    this.contractAddr = {} // store the smart contract instance
 
     // general info about connection and user information
     this.info = {
@@ -15,9 +15,9 @@ class BcExplorer {
       mainAccount: null,
       balance: 0,
       addressUrl: null,
-      currencySymbol: "ETH",
+      currencySymbol: 'ETH',
       chainInfo: null,
-    };
+    }
   }
 
   /**
@@ -29,42 +29,42 @@ class BcExplorer {
   init(addressUrl) {
     return new Promise((resolve, reject) => {
       if (this.web3inst) {
-        resolve(this.web3inst);
+        resolve(this.web3inst)
       }
       // checking if the provider is already set by mist or metamask
       else if (window.ethereum) {
-        const web3 = new Web3(ethereum);
+        const web3 = new Web3(ethereum)
 
         try {
           // Request account access if needed
           ethereum
-            .request({ method: "eth_requestAccounts" })
+            .request({ method: 'eth_requestAccounts' })
             .then((accounts) => {
               console.log(
-                `eth_requestAccounts - accounts: ${JSON.stringify(accounts)}`
-              );
+                `eth_requestAccounts - accounts: ${JSON.stringify(accounts)}`,
+              )
               this.setWeb3(web3, addressUrl).then(() => {
-                resolve(web3);
-              });
+                resolve(web3)
+              })
             })
-            .catch((error) => reject(error));
+            .catch((error) => reject(error))
         } catch (error) {
-          reject(error);
+          reject(error)
         }
       } else {
-        console.log(`addressUrl: ${addressUrl}`);
-        if (typeof addressUrl == "undefined") {
-          reject(new Error("BcExplorer error: impossible to connect."));
+        console.log(`addressUrl: ${addressUrl}`)
+        if (typeof addressUrl == 'undefined') {
+          reject(new Error('BcExplorer error: impossible to connect.'))
         } else {
           // set the provider you want from Web3.providers
-          var provider = new Web3.providers.HttpProvider(addressUrl);
-          const web3js = new Web3(provider);
+          var provider = new Web3.providers.HttpProvider(addressUrl)
+          const web3js = new Web3(provider)
           this.setWeb3(web3js, addressUrl).then(() => {
-            resolve(web3js);
-          });
+            resolve(web3js)
+          })
         }
       }
-    });
+    })
   }
 
   /**
@@ -75,22 +75,22 @@ class BcExplorer {
    * @return {void}
    */
   async setWeb3(web3js, addressUrl) {
-    this.info.addressUrl = addressUrl;
-    this.web3inst = web3js;
-    await this.loadInfo();
+    this.info.addressUrl = addressUrl
+    this.web3inst = web3js
+    await this.loadInfo()
 
     if (
-      this.info.currencySymbol === "MTR" ||
-      this.info.currencySymbol === "ARETH"
+      this.info.currencySymbol === 'MTR' ||
+      this.info.currencySymbol === 'ARETH'
     ) {
-      this.info.isConnected = true;
+      this.info.isConnected = true
     } else {
       this.info.isConnected = await this.web3inst.eth.net
         .isListening()
         .then((res) => {
-          console.log(`web3.eth.net.isListening(): ${res}`);
-          return res;
-        });
+          console.log(`web3.eth.net.isListening(): ${res}`)
+          return res
+        })
     }
   }
 
@@ -105,28 +105,28 @@ class BcExplorer {
    * @return {Promise}
    */
   initContractJson(compiledContractJson, contractInfo) {
-    if (typeof compiledContractJson["abi"] == undefined) {
+    if (typeof compiledContractJson['abi'] == undefined) {
       const error =
-        "BcExplorer error: missing ABI in the compiled Truffle JSON.";
-      console.error(error);
-      throw new Error(error);
+        'BcExplorer error: missing ABI in the compiled Truffle JSON.'
+      console.error(error)
+      throw new Error(error)
     }
 
-    const { contractAddr, contractName } = contractInfo;
+    const { contractAddr, contractName } = contractInfo
 
-    var abiArray = compiledContractJson["abi"];
+    var abiArray = compiledContractJson['abi']
 
     if (!this.web3().utils.isAddress(contractAddr)) {
-      const error = `wrong contract address - contractAddr: ${contractAddr}`;
-      console.error(error);
-      throw new Error(error);
+      const error = `wrong contract address - contractAddr: ${contractAddr}`
+      console.error(error)
+      throw new Error(error)
     }
 
-    const contract = new this.web3inst.eth.Contract(abiArray, contractAddr);
-    contract.currencySymbol = this.info.currencySymbol;
-    this.contractInst[contractName] = contract;
-    this.contractAddr[contractName] = contractAddr;
-    console.log(`contract with name ${contractName} initialized`);
+    const contract = new this.web3inst.eth.Contract(abiArray, contractAddr)
+    contract.currencySymbol = this.info.currencySymbol
+    this.contractInst[contractName] = contract
+    this.contractAddr[contractName] = contractAddr
+    console.log(`contract with name ${contractName} initialized`)
   }
 
   initWithRetry(addressUrl) {
@@ -134,15 +134,15 @@ class BcExplorer {
       this.init(addressUrl)
         .then((x) => resolve(x))
         .catch((_error) => {
-          console.error(_error);
-          console.log("BcExploer init failed! retrying in 3s ...");
+          console.error(_error)
+          console.log('BcExploer init failed! retrying in 3s ...')
           setTimeout(() => {
             this.init(addressUrl)
               .then((x) => resolve(x))
-              .catch((error) => reject(error));
-          }, 3000);
-        });
-    });
+              .catch((error) => reject(error))
+          }, 3000)
+        })
+    })
   }
 
   /**
@@ -160,11 +160,11 @@ class BcExplorer {
     return new Promise((resolve, reject) => {
       this.initWithRetry(addressUrl)
         .then(() => {
-          const contractInfo = contractInfoCallback(compiledContractJson);
-          resolve(this.initContractJson(compiledContractJson, contractInfo));
+          const contractInfo = contractInfoCallback(compiledContractJson)
+          resolve(this.initContractJson(compiledContractJson, contractInfo))
         })
-        .catch((error) => reject(error));
-    });
+        .catch((error) => reject(error))
+    })
   }
 
   /**
@@ -174,8 +174,8 @@ class BcExplorer {
    * @return mixed
    */
   getInfo(attr) {
-    if (attr) return this.info[attr];
-    return this.info;
+    if (attr) return this.info[attr]
+    return this.info
   }
 
   /**
@@ -187,10 +187,10 @@ class BcExplorer {
    */
   web3() {
     if (this.web3inst) {
-      return this.web3inst;
+      return this.web3inst
     }
 
-    console.error("BcExplorer error: Web3 is not initialized.");
+    console.error('BcExplorer error: Web3 is not initialized.')
   }
 
   /**
@@ -200,7 +200,7 @@ class BcExplorer {
    * @return {bool}
    */
   isConnected() {
-    return this.info.isConnected && this.countContracts();
+    return this.info.isConnected && this.countContracts()
   }
 
   /**
@@ -210,31 +210,31 @@ class BcExplorer {
    */
   contract(contractName) {
     if (this.countContracts() == 0) {
-      console.error("BcExplorer error: contract is not initialized.");
+      console.error('BcExplorer error: contract is not initialized.')
 
-      return;
+      return
     }
 
-    contractName = this.contractDefaultName(contractName);
+    contractName = this.contractDefaultName(contractName)
 
-    if (typeof this.contractInst[contractName] == "undefined") {
-      console.error("BcExplorer error: contract does not exist.");
+    if (typeof this.contractInst[contractName] == 'undefined') {
+      console.error('BcExplorer error: contract does not exist.')
 
-      return;
+      return
     }
 
-    return this.contractInst[contractName];
+    return this.contractInst[contractName]
   }
 
   loadChainInfo(chains, networkId) {
-    const chainInfo = chains.find((chain) => chain.networkId == networkId);
-    console.log(`chainInfo: ${JSON.stringify(chainInfo)}`);
+    const chainInfo = chains.find((chain) => chain.networkId == networkId)
+    console.log(`chainInfo: ${JSON.stringify(chainInfo)}`)
     if (chainInfo) {
-      this.info.chainInfo = chainInfo;
-      this.info.currencySymbol = chainInfo.nativeCurrency.symbol;
-      return true;
+      this.info.chainInfo = chainInfo
+      this.info.currencySymbol = chainInfo.nativeCurrency.symbol
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -244,34 +244,34 @@ class BcExplorer {
    */
   getNetworkId() {
     return new Promise((resolve, reject) => {
-      if (this.info.networkId) resolve(this.info.networkId);
+      if (this.info.networkId) resolve(this.info.networkId)
       else {
         this.web3().eth.net.getId((error, networkId) => {
           if (error) {
-            console.error(error);
-            reject(new Error("BcExplorer error: networkId not available."));
+            console.error(error)
+            reject(new Error('BcExplorer error: networkId not available.'))
           } else {
-            this.info.networkId = networkId;
+            this.info.networkId = networkId
             if (this.loadChainInfo(Chains, networkId)) {
-              resolve(networkId);
+              resolve(networkId)
             } else {
-              fetch("https://chainid.network/chains.json")
+              fetch('https://chainid.network/chains.json')
                 .then((r) => r.json())
                 .then((chains) => {
-                  this.loadChainInfo(chains, networkId);
-                  resolve(networkId);
+                  this.loadChainInfo(chains, networkId)
+                  resolve(networkId)
                 })
                 .catch((err) => {
-                  console.log(`fetch error: ${err}`);
+                  console.log(`fetch error: ${err}`)
                   reject(
-                    new Error("BcExplorer error: networkId not available.")
-                  );
-                });
+                    new Error('BcExplorer error: networkId not available.'),
+                  )
+                })
             }
           }
-        });
+        })
       }
-    });
+    })
   }
 
   /**
@@ -281,21 +281,21 @@ class BcExplorer {
    */
   getMainAccount() {
     return new Promise((resolve, reject) => {
-      if (this.info.mainAccount) resolve(this.info.mainAccount);
+      if (this.info.mainAccount) resolve(this.info.mainAccount)
       else
         this.web3().eth.getAccounts((error, accounts) => {
           if (error) {
-            reject(new Error("BcExplorer error: accounts not available."));
+            reject(new Error('BcExplorer error: accounts not available.'))
           } else {
-            this.info.mainAccount = accounts[0];
-            console.log(`found accounts: ${accounts.length}`);
+            this.info.mainAccount = accounts[0]
+            console.log(`found accounts: ${accounts.length}`)
             for (const account of accounts) {
-              console.log(account);
+              console.log(account)
             }
-            resolve(accounts[0]);
+            resolve(accounts[0])
           }
-        });
-    });
+        })
+    })
   }
 
   /**
@@ -305,19 +305,19 @@ class BcExplorer {
    */
   getCoinbase() {
     return new Promise((resolve, reject) => {
-      if (this.info.coinbase) resolve(this.info.coinbase);
+      if (this.info.coinbase) resolve(this.info.coinbase)
       else
         this.web3().eth.getCoinbase((error, coinbase) => {
           if (error) {
-            reject(new Error("BcExplorer error: coinbase not available."));
+            reject(new Error('BcExplorer error: coinbase not available.'))
           } else {
-            console.log(`coinbase: ${coinbase}`);
-            this.info.coinbase = coinbase;
+            console.log(`coinbase: ${coinbase}`)
+            this.info.coinbase = coinbase
 
-            resolve(coinbase);
+            resolve(coinbase)
           }
-        });
-    });
+        })
+    })
   }
 
   /**
@@ -331,20 +331,20 @@ class BcExplorer {
       this.web3()
         .eth.getBalance(accountAddr)
         .then((bal) => {
-          console.log("getBalance:", bal);
-          this.info.balance = bal;
-          resolve(bal);
+          console.log('getBalance:', bal)
+          this.info.balance = bal
+          resolve(bal)
         })
         .catch((err) => {
-          console.log("getBalance error:", err);
+          console.log('getBalance error:', err)
           reject(
             new Error(
-              "BcExplorer error: impossible to get the balance for the account: " +
-                accountAddr
-            )
-          );
-        });
-    });
+              'BcExplorer error: impossible to get the balance for the account: ' +
+                accountAddr,
+            ),
+          )
+        })
+    })
   }
 
   /**
@@ -354,14 +354,14 @@ class BcExplorer {
    */
   async loadInfo() {
     try {
-      var mainAccount = await this.getMainAccount();
-      await this.getCoinbase();
-      await this.getBalance(mainAccount);
-      await this.getNetworkId();
+      var mainAccount = await this.getMainAccount()
+      await this.getCoinbase()
+      await this.getBalance(mainAccount)
+      await this.getNetworkId()
 
-      return Promise.resolve(this.info);
+      return Promise.resolve(this.info)
     } catch (e) {
-      return Promise.reject(e);
+      return Promise.reject(e)
     }
 
     // Nested promises: the following piece of code does the same the
@@ -391,23 +391,23 @@ class BcExplorer {
    * @return {numeric}
    */
   weiToEther(bal) {
-    if (typeof bal == "object") {
-      bal = bal.toNumber();
+    if (typeof bal == 'object') {
+      bal = bal.toNumber()
     }
 
-    return this.web3().utils.fromWei(bal, "ether");
+    return this.web3().utils.fromWei(bal, 'ether')
   }
 
   weiToEtherStr(bal) {
-    return `${this.weiToEther(bal)} ${this.info.currencySymbol}`;
+    return `${this.weiToEther(bal)} ${this.info.currencySymbol}`
   }
 
   etherToWei(bal) {
-    if (typeof bal == "object") {
-      bal = bal.toNumber();
+    if (typeof bal == 'object') {
+      bal = bal.toNumber()
     }
 
-    return this.web3().utils.toWei(bal, "ether");
+    return this.web3().utils.toWei(bal, 'ether')
   }
 
   /**
@@ -419,7 +419,7 @@ class BcExplorer {
   toAscii(bytes) {
     return this.web3()
       .toAscii(bytes)
-      .replace(/\u0000/g, "");
+      .replace(/\u0000/g, '')
   }
 
   /**
@@ -429,7 +429,7 @@ class BcExplorer {
    * @return {string}
    */
   toDate(timestamp) {
-    return new Date(timestamp * 1000).toISOString();
+    return new Date(timestamp * 1000).toISOString()
   }
 
   /**
@@ -439,17 +439,17 @@ class BcExplorer {
    * @return {Number}
    */
   countContracts() {
-    var total = 0;
+    var total = 0
 
     for (var key in this.contractInst) {
-      if (this.contractInst.hasOwnProperty(key)) total++;
+      if (this.contractInst.hasOwnProperty(key)) total++
     }
 
-    return total;
+    return total
   }
 
   getContractAddress(contractName) {
-    return this.contractAddr[contractName];
+    return this.contractAddr[contractName]
   }
 
   /**
@@ -459,15 +459,15 @@ class BcExplorer {
    * @return {string}
    */
   contractDefaultName(name) {
-    return name || "Bookstore";
+    return name || 'Bookstore'
   }
 
   getTransactionUrl(txHash) {
     const urlBase = this.info.chainInfo.explorers
       ? this.info.chainInfo.explorers[0].url
-      : "https://etherscan.io";
-    return `${urlBase}/tx/${txHash}`;
+      : 'https://etherscan.io'
+    return `${urlBase}/tx/${txHash}`
   }
 }
 
-export default BcExplorer;
+export default BcExplorer

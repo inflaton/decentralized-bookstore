@@ -9,8 +9,6 @@
     <h2 class="title">Book List</h2>
     <hr />
 
-    <!-- <div class="clearfix"></div> -->
-
     <h2 v-show="!bcConnected">Not connect to the blockchain: please wait.</h2>
 
     <h2 v-show="isLoading && bcConnected">Loading...</h2>
@@ -20,7 +18,7 @@
         v-for="(book, i) in books"
         v-bind:key="'book' + book.id + i"
       >
-        <card
+        <Card
           :bookObject="book"
           :userObject="getUserObject()"
           @reloadList="reloadList"
@@ -38,8 +36,8 @@
 <script>
 // importing common function
 import mixin from '../libs/mixinViews'
-import card from '../components/card.vue'
-import bookForm from '../components/bookForm.vue'
+import Card from '../components/Card.vue'
+import BookForm from '../components/BookForm.vue'
 
 /**
  * List view component: this component shows list of the registered books
@@ -49,8 +47,8 @@ export default {
   mixins: [mixin],
 
   components: {
-    card,
-    bookForm,
+    Card,
+    BookForm,
   },
 
   data() {
