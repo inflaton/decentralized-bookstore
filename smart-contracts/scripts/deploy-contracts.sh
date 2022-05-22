@@ -6,5 +6,8 @@ cd .. && \
     yarn deploy:meter && \
     yarn deploy:rinkarby && \
     yarn deploy:rinkeby && \
+    yarn deploy:kovan && \
+    yarn deploy:optimism && \
+    yarn deploy:goerli && \
     yarn deploy:ropsten && \
     ./scripts/sync-contracts.sh
