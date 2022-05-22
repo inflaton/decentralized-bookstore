@@ -129,7 +129,7 @@ export default {
       console.log(`invokeSmartContract - option: ${JSON.stringify(option)}`)
 
       this.perf.t0 = performance.now()
-      // call method/buyBook function of contract
+
       contractInfo.method
         .send(option, (error, txHash) =>
           this.sendTransactionCallback(
