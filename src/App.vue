@@ -18,7 +18,10 @@
       </p>
 
       <p v-show="bcSmartContractAddressError">
-        <b>It seems like the address of the smart contract is wrong!</b>
+        <b
+          >It seems like the address of the smart contract is wrong, or the
+          smart contract has not been deployed to this network!</b
+        >
       </p>
 
       <hr />

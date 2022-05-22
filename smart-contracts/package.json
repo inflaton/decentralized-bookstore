@@ -17,6 +17,7 @@
     "deploy:rinkarby": "truffle migrate --reset --network rinkarby",
     "deploy:polygon": "truffle migrate --reset --network polygon",
     "deploy:kovan": "truffle migrate --reset --network kovan",
+    "deploy:goerli": "truffle migrate --reset --network goerli",
     "deploy:optimism": "truffle migrate --reset --network optimism"
   },
   "engines": {

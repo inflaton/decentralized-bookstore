@@ -18,9 +18,9 @@
  *
  */
 
-const PrivateKeyProvider = require("@truffle/hdwallet-provider");
-const dotEnv = require("dotenv-flow");
-dotEnv.config();
+const PrivateKeyProvider = require('@truffle/hdwallet-provider')
+const dotEnv = require('dotenv-flow')
+dotEnv.config()
 
 module.exports = {
   /**
@@ -40,37 +40,37 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     development: {
-      host: "127.0.0.1", // Localhost (default: none)
+      host: '127.0.0.1', // Localhost (default: none)
       port: 7545, // Standard Ethereum port (default: none)
-      network_id: "*", // Any network (default: none)
+      network_id: '*', // Any network (default: none)
     },
 
     besu: {
       provider: () => {
         return new PrivateKeyProvider(
           process.env.BESU_PRIVATE_KEY,
-          "http://localhost:8545"
-        );
+          'http://localhost:8545',
+        )
       },
-      network_id: "*", // Any network (default: none)
+      network_id: '*', // Any network (default: none)
     },
 
     meter: {
       provider: () => {
         return new PrivateKeyProvider(
           process.env.METER_PRIVATE_KEY,
-          "https://rpctest.meter.io"
-        );
+          'https://rpctest.meter.io',
+        )
       },
-      network_id: "*", // Any network (default: none)
+      network_id: '*', // Any network (default: none)
     },
 
     ropsten: {
       provider: () => {
         return new PrivateKeyProvider(
           process.env.ROPSTEN_PRIVATE_KEY,
-          `wss://ropsten.infura.io/ws/v3/${process.env.INFURA_API_KEY}`
-        );
+          `wss://ropsten.infura.io/ws/v3/${process.env.INFURA_API_KEY}`,
+        )
       },
       networkCheckTimeout: 10000,
       network_id: 3, // Ropsten's id
@@ -84,8 +84,8 @@ module.exports = {
       provider: () => {
         return new PrivateKeyProvider(
           process.env.RINKEBY_PRIVATE_KEY,
-          `wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_API_KEY}`
-        );
+          `wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_API_KEY}`,
+        )
       },
       networkCheckTimeout: 10000,
       network_id: 4,
@@ -99,8 +99,8 @@ module.exports = {
       provider: () => {
         return new PrivateKeyProvider(
           process.env.RINKARBY_PRIVATE_KEY,
-          `wss://arbitrum-rinkeby.infura.io/ws/v3/${process.env.INFURA_API_KEY}`
-        );
+          `wss://arbitrum-rinkeby.infura.io/ws/v3/${process.env.INFURA_API_KEY}`,
+        )
       },
       networkCheckTimeout: 10000,
       network_id: 421611,
@@ -113,11 +113,25 @@ module.exports = {
       provider: () => {
         return new PrivateKeyProvider(
           process.env.KOVAN_PRIVATE_KEY,
-          `wss://kovan.infura.io/ws/v3/${process.env.INFURA_API_KEY}`
-        );
+          `wss://kovan.infura.io/ws/v3/${process.env.INFURA_API_KEY}`,
+        )
       },
       networkCheckTimeout: 10000,
       network_id: 42,
+      confirmations: 2, // # of confs to wait between deployments. (default: 0)
+      timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+    },
+
+    goerli: {
+      provider: () => {
+        return new PrivateKeyProvider(
+          process.env.GOERLI_PRIVATE_KEY,
+          `wss://goerli.infura.io/ws/v3/${process.env.INFURA_API_KEY}`,
+        )
+      },
+      networkCheckTimeout: 10000,
+      network_id: 5,
       confirmations: 2, // # of confs to wait between deployments. (default: 0)
       timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
@@ -127,9 +141,9 @@ module.exports = {
       provider: () => {
         return new PrivateKeyProvider(
           process.env.OPTIMISM_KOVAN_PRIVATE_KEY,
-          `https://optimism-kovan.infura.io/v3/${process.env.INFURA_API_KEY}`
+          `https://optimism-kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
           // 'https://kovan.optimism.io/',
-        );
+        )
       },
       networkCheckTimeout: 10000,
       network_id: 69,
@@ -142,11 +156,11 @@ module.exports = {
       provider: () => {
         return new PrivateKeyProvider(
           process.env.POLYGON_PRIVATE_KEY,
-          `https://polygon-mumbai.infura.io/v3/${process.env.INFURA_API_KEY}`
+          `https://polygon-mumbai.infura.io/v3/${process.env.INFURA_API_KEY}`,
           // "https://matic-mumbai.chainstacklabs.com"
           // 'https://rpc-mumbai.maticvigil.com',
           // "https://matic-testnet-archive-rpc.bwarelabs.com"
-        );
+        )
       },
       networkCheckTimeout: 10000,
       network_id: 80001,
@@ -165,7 +179,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.1", // Fetch exact version from solc-bin (default: truffle's version)
+      version: '0.8.1', // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
@@ -176,4 +190,4 @@ module.exports = {
       // }
     },
   },
-};
+}
