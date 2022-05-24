@@ -1,8 +1,8 @@
 # Decentralized Bookstore
 
-This sample dApp uses [Vue.js](https://vuejs.org/) for developing SPA as front-end and Truffle & Solidity for developing Smart Contract as backend.
+This sample dApp is the companion project of my blog [Tech deep-dive on web3 dApp development](https://mirror.xyz/dashboard/edit/tJf6H6wsOfOGJIdWqopK7iopcuD0NRxdmn1_de2m_Lo). It uses [Vue.js](https://vuejs.org/) for developing SPA as front-end and Truffle & Solidity for developing Smart Contract as backend.
 
-Please refer to the following steps to deploy this DApp on EVM-compliant testnets and IPFS.
+Please refer to the following steps to deploy this dApp on EVM-compliant testnets and IPFS.
 
 ### 1. NodeJS version 14 or above
 ```
@@ -73,9 +73,11 @@ Set up environment variables in .env
 ```
 ~/decentralized-bookstore> cp .env.example .env
 ~/decentralized-bookstore> cat .env
-VITE_MC_BOOK_NFT_ENDPOINT="ipfs://QmUwkKTgy1tYHLZLcFS8w3QagnSPzyEZfHJkQxWxLWWZik"
+VITE_BOOK_NFT_ENDPOINT="ipfs://QmXCE3puPvYEVchXugNBp6u8wi1o2muVbVzZHookyBqZ2S"
+
 VITE_PINATA_API_KEY=
 VITE_PINATA_SECRET_API_KEY=
+
 IPFS_DEPLOY_PINATA__API_KEY=
 IPFS_DEPLOY_PINATA__SECRET_API_KEY=
 ```
