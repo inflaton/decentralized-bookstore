@@ -6,7 +6,7 @@ This sample dApp is the companion project of my blog
 
 Please refer to the following steps to deploy this dApp on EVM-compliant testnets and IPFS.
 
-### 1. NodeJS version 14 or above
+### 1. NodeJS version 16
 ```
 ~/decentralized-bookstore> node -v
 v16.8.0
