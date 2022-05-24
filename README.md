@@ -6,22 +6,22 @@ Please refer to the following steps to deploy this DApp on EVM-compliant testnet
 
 ### 1. NodeJS version 14 or above
 ```
-node -v
-v14.19.1
+~/decentralized-bookstore> node -v
+v16.8.0
 ```
 
 ### 2. Deploy smart contracts
 
 Install dependencies
 ```
-cd smart-contracts
-yarn install
+~/decentralized-bookstore> cd smart-contracts
+~/decentralized-bookstore/smart-contracts> yarn install
 ```
 
 Set up environment variables in .env
 ```
-cp .env.example .env
-cat .env
+~/decentralized-bookstore/smart-contracts> cp .env.example .env
+~/decentralized-bookstore/smart-contracts> cat .env
 INFURA_API_KEY=
 BESU_PRIVATE_KEY=
 METER_PRIVATE_KEY=
@@ -38,7 +38,7 @@ GOERLI_PRIVATE_KEY=
 
 * *_PRIVATE_KEY would be the private keys used by Truffle to deploy smart contracts to different testnets - make sure the accounts have enough balances to cover the transaction fees required for deployment.
 
-* 8 public testnets are configured in package.json and truffle-config.json. 
+* 8 public testnets are configured in package.json and truffle-config.json
   * Layer 1 (L1)
     * Ropsten
     * Rinkeby
@@ -65,14 +65,14 @@ yarn deploy:all
 
 Install dependencies
 ```
-cd ..
-yarn install
+~/decentralized-bookstore/smart-contracts> cd ..
+~/decentralized-bookstore> yarn install
 ```
 
 Set up environment variables in .env
 ```
-cp .env.example .env
-cat .env
+~/decentralized-bookstore> cp .env.example .env
+~/decentralized-bookstore> cat .env
 VITE_MC_BOOK_NFT_ENDPOINT="ipfs://QmUwkKTgy1tYHLZLcFS8w3QagnSPzyEZfHJkQxWxLWWZik"
 VITE_PINATA_API_KEY=
 VITE_PINATA_SECRET_API_KEY=
@@ -84,26 +84,28 @@ IPFS_DEPLOY_PINATA__SECRET_API_KEY=
 
 Run dApp UI
 ```
-yarn install
-yarn dev
+~/decentralized-bookstore> yarn install
+~/decentralized-bookstore> yarn dev
 ```
 
 Navigate to http://localhost:3000/ to see the app running. 
 
 To run at a different port, create a file .env.local and define the port there: 
 ```
-cat .env.local
+~/decentralized-bookstore> cat .env.local
 PORT=3001
 ```
 
 For production build, run
 ```
-yarn build
+~/decentralized-bookstore> yarn build
 ```
 
 The generated folder dist/ can be deployed to any hosting environment as a static website. E.g, GitHub Pages, Netlify.
 
 For IFPS deployment, run:
 ```
-yarn deploy
+~/decentralized-bookstore> yarn deploy
 ```
+
+The latest dApp front-end has been deployed at [https://dweb.link/ipfs/QmTgoPpWnGMnPhNSBKmsoWdSLEFzmhwZcep6JHQ935TZw2](https://dweb.link/ipfs/QmTgoPpWnGMnPhNSBKmsoWdSLEFzmhwZcep6JHQ935TZw2).
