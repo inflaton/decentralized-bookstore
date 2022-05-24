@@ -1,6 +1,8 @@
 # Decentralized Bookstore
 
-This sample dApp is the companion project of my blog [Tech deep-dive on web3 dApp development](https://mirror.xyz/dashboard/edit/tJf6H6wsOfOGJIdWqopK7iopcuD0NRxdmn1_de2m_Lo). It uses [Vue.js](https://vuejs.org/) for developing SPA as front-end and Truffle & Solidity for developing Smart Contract as backend.
+This sample dApp is the companion project of my blog 
+<a href="https://mirror.xyz/dashboard/edit/tJf6H6wsOfOGJIdWqopK7iopcuD0NRxdmn1_de2m_Lo" target="_blank">Tech deep-dive on web3 dApp development</a>
+. It uses [Vue.js](https://vuejs.org/) for developing SPA as front-end and Truffle & Solidity for developing Smart Contract as backend.
 
 Please refer to the following steps to deploy this dApp on EVM-compliant testnets and IPFS.
 
