@@ -43,6 +43,19 @@ class BcExplorer {
               console.log(
                 `eth_requestAccounts - accounts: ${JSON.stringify(accounts)}`,
               )
+
+              // detect Metamask account change
+              window.ethereum.on('accountsChanged', function (accounts) {
+                console.log('accountsChanges', accounts)
+                window.location.reload()
+              })
+
+              // detect Network account change
+              window.ethereum.on('chainChanged', function (chainId) {
+                console.log('chainChanged', chainId)
+                window.location.reload()
+              })
+
               this.setWeb3(web3, addressUrl).then(() => {
                 resolve(web3)
               })
